@@ -1,0 +1,21 @@
+{
+  "name": "atwifi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "denodeify": "^1.2.1",
+    "express": "^4.15.2",
+    "jade": "^1.11.0",
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.25",
+    "request": "^2.81.0",
+    "restify": "^4.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

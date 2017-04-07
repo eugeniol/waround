@@ -1,0 +1,40 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.5
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: asd
+      MYSQL_DATABASE: waround
+      MYSQL_USER: foofoo
+      MYSQL_PASSWORD: almgab
+  web:
+     build: ./wbackend
+     command: python manage.py runserver 0.0.0.0:8000
+     volumes:
+       - ./wbackend:/code
+     ports:
+       - "8001:8000"
+     expose:
+      - "3306"
+     depends_on:
+       - db
+  atwifi:
+     build: ./atwifi
+     command: node index.js
+     volumes:
+       - ./atwifi:/code
+     ports:
+       - "8002:8080"
+     depends_on:
+       - web
+     environment:
+       - API_TOKEN=${API_TOKEN}
+       - API_URL=http://web:8000/api/
+volumes:
+    db_data:
+    
