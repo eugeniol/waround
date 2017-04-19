@@ -21,6 +21,7 @@ from device_log import views
 
 router = routers.SimpleRouter()
 router.register(r'devices/log', views.DeviceLogViewSet)
+
 router.register(r'devices', views.DeviceViewSet)
 
 urlpatterns = router.urls

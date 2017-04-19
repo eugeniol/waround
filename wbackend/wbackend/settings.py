@@ -73,18 +73,25 @@ WSGI_APPLICATION = 'wbackend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#         'NAME': 'waround',  # Or path to database file if using sqlite3.
+#         # The following settings are not used with sqlite3:
+#         'USER': 'root',
+#         'PASSWORD': 'asd',
+#         'HOST': 'db',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+#         'PORT': '3306',  # Set to empty string for default.
+#     }
+#
+# }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'waround',  # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'root',
-        'PASSWORD': 'asd',
-        'HOST': 'db',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '3306',  # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-
 }
 
 # Password validation
@@ -124,7 +131,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['web', 'localhost', '127.0.0.1','db','atwifi']
+ALLOWED_HOSTS = ['web', 'localhost', '127.0.0.1', 'db', 'atwifi', '192.168.0.251']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

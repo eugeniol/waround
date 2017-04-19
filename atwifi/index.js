@@ -55,8 +55,10 @@ function registerDeviceAction(action) {
             public_id: device.deviceID,
             friendly_name: device.friendlyName,
             mac_address: device.knownMACAddresses[0]
-        }, 'public_id').then(device => devicesLogApi.create({
-            device: device.id, type: LOG_ACTIONS[action]
-        })).then(null, console.error)
+        }, 'public_id').then(device => {
+            devicesLogApi.create({
+                device: device.id, type: LOG_ACTIONS[action]
+            })
+        }).then(null, console.error)
     }
 }

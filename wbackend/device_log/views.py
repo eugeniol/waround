@@ -4,10 +4,11 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
 from rest_framework import serializers
+from rest_framework import generics
 from device_log.models import Device, DeviceLog
 from device_log.serializers import DeviceLogSerializer, DeviceSerializer, CustomerSerializer
 
-from django_filters.rest_framework import DjangoFilterBackend
+import django_filters.rest_framework
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
@@ -27,9 +28,28 @@ class DeviceViewSet(viewsets.ModelViewSet):
         return queryset
 
 
+import django_filters.rest_framework
+
+
 class DeviceLogViewSet(viewsets.ModelViewSet):
     queryset = DeviceLog.objects.all()
     serializer_class = DeviceLogSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases
+        for the currently authenticated user.
+        """
+        queryset = DeviceLog.objects.all()
+
+        public_id = self.request.query_params.get('device', None)
+
+        if public_id is not None:
+            queryset = queryset.filter(device=public_id)
+
+        queryset = queryset.order_by('-created_at')
+
+        return queryset
 
 # class BaseViewSet(viewsets.ModelViewSet):
 # authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)

@@ -10,7 +10,7 @@ class Customer(models.Model):
 
     user = models.ForeignKey(User, null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.first_name + ' ' + self.last_name
 
 
